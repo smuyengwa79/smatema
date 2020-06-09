@@ -1,0 +1,57 @@
+---
+title: "Sam Matema Analysis"
+author: "Shylock"
+date: "6/4/2020"
+output:
+  html_document:
+    df_print: paged
+word_document:
+  reference_docx: word-styles-reference.docx
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+source('~/Rprogramming/Sam_Matema/read_data001.R', echo=FALSE)
+
+```
+
+# Demographics table
+
+```{r table01, message=FALSE, echo=FALSE, results='asis'}
+tab1 <- tableby(genderhousehold ~., data=dem)
+summary(tab1)
+```
+
+## Summary of roster (skills, education, etc )
+
+```{r table02, echo=FALSE, message=FALSE, results='asis'}
+
+tab2 <- tableby(sec1q2 ~., data=roster)
+summary(tab2)
+```
+
+
+##  Food security
+
+This section discusses the food security situation over the past five years,... 
+```{r table03, echo=FALSE, message=FALSE, results='asis'}
+tab3 <- tableby(genderhousehold ~., data=fs)
+summary(tab3)
+```
+
+## What are the main shocks
+
+```{r table04, results='asis'}
+tab4 <- tableby(genderhousehold ~., data=shocks)
+summary(tab4)
+```
+
+## Adaptation to shocks 
+
+```{r table05, results='asis'}
+tab5 <- tableby(sec3b1 ~., data=adaptation)
+summary(tab5)
+```
+
+
+
