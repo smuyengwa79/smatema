@@ -123,16 +123,17 @@ sacred_sites <- sam_data_001 %>%
 
 sam_data_006 <- read_excel("sam_data_001.xlsx", sheet = 6) %>% 
   clean_names()
+abt <-sam_data_006 %>% 
+  select(1:2)
+labels(abt) <- c(section4c_sec4c1a = "Is there a sacred bird, tree, animal?", 
+                 section4c_sec4c1b = "Indicate the name")
 
 # SECTION 5: PROGRAMS -----------------------------------------------------
 
 sam_data_007 <- read_excel("sam_data_001.xlsx", sheet = 7) %>% 
   clean_names()
 
-abt <-sam_data_007 %>% 
-  select(1:2)
-labels(abt) <- c(section4c_sec4c1a = "Is there a sacred bird, tree, animal?", 
-                 section4c_sec4c1b = "Indicate the name")
+
 
 # SECTION 6: LAND  --------------------------------------------------------
 
@@ -200,4 +201,36 @@ labels(programs) = c(
   Cost_of_Transport = "Cost of transport"
   
 )
+
+
+# SECTION 6C: CROP PRODUCTION-MAJOR CROP & PRODUCTION ---------------------
+sam_data_010 <- read_excel("sam_data_001.xlsx", sheet = 10) %>% 
+  clean_names()
+names(sam_data_010) <- gsub("sec6c_", "", names(sam_data_010))
+crops <- sam_data_010 %>%  select(1:3, 29:30)
+labels(crops) <- c(sec6c1 = "Name of crop grown", 
+                   sec6c2 = "Trend in proportion under this croop", 
+                   sec6c3 =  "Explain the change in land size", 
+                   sec6c4 = "Production levels in 2009", 
+                   sec6c5 = "Explain the change in production")
+
+
+# SECTION D: CROP PRODUCTION -CHANGING PREFERENCES ------------------------
+
+sam_data_011 <- read_excel("sam_data_001.xlsx", sheet = 11) %>% 
+  clean_names()
+crops_1980  <- sam_data_011 %>% 
+  select(1:2)
+labels(crops_1980) <- c(sec6d_sec6d1 = "Crop dropped since 1980", 
+                        sec6d_sec6d2 = "Why was the crop dropped" )
+
+
+# SECTION 6D: CROP PRODUCTION AND PREFERENCES ADOPTED ---------------------
+sam_data_012 <- read_excel("sam_data_001.xlsx", sheet = 12) %>% 
+  clean_names()
+crops_1980a  <- sam_data_012 %>% 
+  select(1:2)
+labels(crops_1980a) <- c(sec6dd_sec6d3 = "Crop dropped since 1980", 
+                        sec6dd_sec6d4 = "Why was the crop dropped" )
+
 
