@@ -6,7 +6,7 @@ library(openxlsx)
 library(gt)
 library(arsenal)
 
-# Load the dataset, reading sheet 1 of the file to create basic ta --------
+# LOAD DATA --------
 
 
 sam_data_001 <- read_excel("sam_data_001.xlsx") %>%
@@ -29,7 +29,7 @@ labels(sam_data_001) = c(
 pt <- sam_data_001 %>%
   select(genderhousehold, index)
 
-# Demographic summary -----------------------------------------------------
+# DEMOGRAPHIC SUMMARY -----------------------------------------------------
 
 dem <- sam_data_001 %>%
   select(7:18, sec4b1)
@@ -49,7 +49,7 @@ dem <- dem %>%
   )
 
 
-# Household Roster --------------------------------------------------------
+# HOUSEHOLD ROSTER --------------------------------------------------------
 
 
 sam_data_002 <- read_excel("sam_data_001.xlsx", sheet = 2) %>%
@@ -95,9 +95,70 @@ names(sam_data_004) <- gsub("sec3b/", "", names(sam_data_004))
 adaptation <- sam_data_004 %>% 
   select(sec3b1, 5:18)
 
-land <- read_excel("sam_data_001.xlsx", sheet = 8) %>% 
+
+# SECTION 4A: SHOCKS AND LOCAL KNOWLEDGE SYSTEMS --------------------------
+
+sam_data_005 <- read_excel("sam_data_001.xlsx", sheet = 5) %>%
   clean_names()
-land <- land %>% 
+names(sam_data_005) <- gsub("sec4a_", "", names(sam_data_005))
+iks <- sam_data_005 %>%
+  select(1:2)
+labels(iks) <- c(sec4a1 = "Changes in weather pattern",
+                 sec4a2 = "Are the ways that local people predict or know about weather other than through radio")
+
+## Part B
+
+iks2 <- sam_data_001 %>% 
+  select(genderhousehold, sec4a4, sec4a6)
+labels(iks2) <- c(genderhousehold = "Gender of household head", 
+                  sec4a4 = "In your view, are the local weather prediction systems useful?", 
+                  sec4a6 = "Have you used this informatoon to plan your agricutural activities?")
+
+# SECTION 4B:SACRED SITES -------------------------------------------------
+sacred_sites <- sam_data_001 %>% 
+  select(sec4b1, sec4b2)
+
+
+# SECTION 4C: SACRED ANIMALS, BIRDS AND TREES -----------------------------
+
+sam_data_006 <- read_excel("sam_data_001.xlsx", sheet = 6) %>% 
+  clean_names()
+
+# SECTION 5: PROGRAMS -----------------------------------------------------
+
+sam_data_007 <- read_excel("sam_data_001.xlsx", sheet = 7) %>% 
+  clean_names()
+
+sam_data_007$section5_sec5q2_rec <- fct_recode(sam_data_007$section5_sec5q2,
+                                               "Social Welfare" = "Social walfare",
+                                               "Government" = "Gvt",
+                                               "BEAM" = "Beam",
+                                               "Social Welfare" = "Social welfare",
+                                               "Agritex" = "Agritex Officers",
+                                               "Vet Services" = "Veterinary Services",
+                                               "Vet Services" = "Vetinary services",
+                                               "Agritex" = "Agritex Officer",
+                                               "Vet Services" = "Veterinary Officers",
+                                               "Vet Services" = "Veterinary",
+                                               "Donors" = "USAID",
+                                               "Agritex" = "Agritex officers",
+                                               "Donors" = "NAC",
+                                               "Agritex" = "Arex",
+                                               "Donors" = "NGO",
+                                               "Agritex" = "Agritex offices",
+                                               "Vet Services" = "Verterinary services",
+                                               "Donors" = "Usaid",
+                                               "Donors" = "WfP",
+                                               "Government" = "GVT",
+                                               "Donors" = "Dor"
+)
+
+
+# SECTION 6: LAND  --------------------------------------------------------
+
+sam_data_008 <- read_excel("sam_data_001.xlsx", sheet = 8) %>% 
+  clean_names()
+land <- sam_data_008 %>% 
   select(c(-3, -11:-17, -20:-39))
 
 labels(land) = c(
@@ -127,5 +188,3 @@ land <- land %>%
          `Extent_of_Degradation` = plot_questions_sec6a10,
          `Manage` = plot_questions_sec6a11)
 
-programs <- read_excel("sam_data_001.xlsx", sheet = 7) %>% 
-  clean_names()

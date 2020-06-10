@@ -53,5 +53,18 @@ tab5 <- tableby(sec3b1 ~., data=adaptation)
 summary(tab5)
 ```
 
+## Section 4A: Shocks and local knowledge
+
+```{r table06, results='asis'}
+tab6 <- tableby(sec4a2 ~., data=iks)
+summary(tab6)
+```
+
+When asked if these prediction systems are useful, the community members indicated the following: 
+
+```{r table07, results='asis'}
+tab7 <- tableby(genderhousehold ~., data=iks2)
+summary(tab7)
+```
 
 
