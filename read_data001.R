@@ -127,15 +127,41 @@ land <- land %>%
          `Extent_of_Degradation` = plot_questions_sec6a10,
          `Manage` = plot_questions_sec6a11)
 
-programs <- read_excel("sam_data_001.xlsx", sheet = 7) %>% 
+sam_data_007 <- read_excel("sam_data_001.xlsx", sheet = 7) %>% 
   clean_names()
 
-programs <- left_join(pt, programs, by = c("index" = "parent_index"))%>% 
+sam_data_007 <- left_join(pt, sam_data_007, by = c("index" = "parent_index"))%>% 
   select(genderhousehold, section5_sec5q1, section5_sec5q2, section5_sec5q3,
          section5_sec5q4, section5_sec5q5, section5_sec5q6, section5_sec5q7,
          section5_sec5q8, section5_sec5q9)
 
-programs <- programs %>% 
+sam_data_007$section5_sec5q2 <- fct_recode(sam_data_007$section5_sec5q2,
+                                           "Social Welfare" = "Social walfare",
+                                           "Government" = "Gvt",
+                                           "BEAM" = "Beam",
+                                           "Social Welfare" = "Social welfare",
+                                           "Agritex" = "Agritex Officers",
+                                           "Vet Services" = "Veterinary Services",
+                                           "Vet Services" = "Vetinary services",
+                                           "Agritex" = "Agritex Officer",
+                                           "Vet Services" = "Veterinary Officers",
+                                           "Vet Services" = "Veterinary",
+                                           "Donors" = "USAID",
+                                           "Agritex" = "Agritex officers",
+                                           "Donors" = "NAC",
+                                           "Agritex" = "Arex",
+                                           "Donors" = "NGO",
+                                           "Agritex" = "Agritex offices",
+                                           "Vet Services" = "Verterinary services",
+                                           "Donors" = "Usaid",
+                                           "Donors" = "WfP",
+                                           "Donors" = "Donor",
+                                           "Government" = "GVT",
+                                           "Donors" = "Dor",
+                                           "Vet Services" = "Vertinary"
+)
+
+sam_data_007 <- sam_data_007 %>% 
   rename(`Programmes` = section5_sec5q1,
          `Source` = section5_sec5q2,
          `Did_HH_Travel` = section5_sec5q3,
@@ -146,7 +172,7 @@ programs <- programs %>%
          `Duration_in_minutes` = section5_sec5q8,
          `Cost_of_Transport` = section5_sec5q9)
 
-labels(programs) = c(
+labels(sam_data_007) = c(
   Programmes = "Services and programmes",
   Source = "Who provided support?",
   Did_HH_Travel = "Did hh member travelled to get suppot?",
@@ -158,3 +184,4 @@ labels(programs) = c(
   Cost_of_Transport = "Cost of transport"
   
 )
+
