@@ -6,7 +6,7 @@ library(openxlsx)
 library(gt)
 library(arsenal)
 
-# Load the dataset, reading sheet 1 of the file to create basic ta --------
+# LOAD DATA --------
 
 
 sam_data_001 <- read_excel("sam_data_001.xlsx") %>%
@@ -29,7 +29,7 @@ labels(sam_data_001) = c(
 pt <- sam_data_001 %>%
   select(genderhousehold, index)
 
-# Demographic summary -----------------------------------------------------
+# DEMOGRAPHIC SUMMARY -----------------------------------------------------
 
 dem <- sam_data_001 %>%
   select(7:18, sec4b1)
@@ -49,7 +49,7 @@ dem <- dem %>%
   )
 
 
-# Household Roster --------------------------------------------------------
+# HOUSEHOLD ROSTER --------------------------------------------------------
 
 
 sam_data_002 <- read_excel("sam_data_001.xlsx", sheet = 2) %>%
@@ -95,9 +95,51 @@ names(sam_data_004) <- gsub("sec3b/", "", names(sam_data_004))
 adaptation <- sam_data_004 %>% 
   select(sec3b1, 5:18)
 
-land <- read_excel("sam_data_001.xlsx", sheet = 8) %>% 
+
+# SECTION 4A: SHOCKS AND LOCAL KNOWLEDGE SYSTEMS --------------------------
+
+sam_data_005 <- read_excel("sam_data_001.xlsx", sheet = 5) %>%
   clean_names()
-land <- land %>% 
+names(sam_data_005) <- gsub("sec4a_", "", names(sam_data_005))
+iks <- sam_data_005 %>%
+  select(1:2)
+labels(iks) <- c(sec4a1 = "Changes in weather pattern",
+                 sec4a2 = "Are the ways that local people predict or know about weather other than through radio")
+
+## Part B
+
+iks2 <- sam_data_001 %>% 
+  select(genderhousehold, sec4a4, sec4a6)
+labels(iks2) <- c(genderhousehold = "Gender of household head", 
+                  sec4a4 = "In your view, are the local weather prediction systems useful?", 
+                  sec4a6 = "Have you used this informatoon to plan your agricutural activities?")
+
+# SECTION 4B:SACRED SITES -------------------------------------------------
+sacred_sites <- sam_data_001 %>% 
+  select(sec4b1, sec4b2)
+
+
+# SECTION 4C: SACRED ANIMALS, BIRDS AND TREES -----------------------------
+
+sam_data_006 <- read_excel("sam_data_001.xlsx", sheet = 6) %>% 
+  clean_names()
+abt <-sam_data_006 %>% 
+  select(1:2)
+labels(abt) <- c(section4c_sec4c1a = "Is there a sacred bird, tree, animal?", 
+                 section4c_sec4c1b = "Indicate the name")
+
+# SECTION 5: PROGRAMS -----------------------------------------------------
+
+sam_data_007 <- read_excel("sam_data_001.xlsx", sheet = 7) %>% 
+  clean_names()
+
+
+
+# SECTION 6: LAND  --------------------------------------------------------
+
+sam_data_008 <- read_excel("sam_data_001.xlsx", sheet = 8) %>% 
+  clean_names()
+land <- sam_data_008 %>% 
   select(c(-3, -11:-17, -20:-39))
 
 labels(land) = c(
@@ -127,7 +169,12 @@ land <- land %>%
          `Extent_of_Degradation` = plot_questions_sec6a10,
          `Manage` = plot_questions_sec6a11)
 
+<<<<<<< HEAD
 sam_data_007 <- read_excel("sam_data_001.xlsx", sheet = 7) %>% 
+=======
+
+programs <- read_excel("sam_data_001.xlsx", sheet = 7) %>% 
+>>>>>>> a692a78cfd41202e2b4ba0256cfb8a5b130bd3fc
   clean_names()
 
 sam_data_007 <- left_join(pt, sam_data_007, by = c("index" = "parent_index"))%>% 
@@ -185,3 +232,38 @@ labels(sam_data_007) = c(
   
 )
 
+<<<<<<< HEAD
+=======
+
+# SECTION 6C: CROP PRODUCTION-MAJOR CROP & PRODUCTION ---------------------
+sam_data_010 <- read_excel("sam_data_001.xlsx", sheet = 10) %>% 
+  clean_names()
+names(sam_data_010) <- gsub("sec6c_", "", names(sam_data_010))
+crops <- sam_data_010 %>%  select(1:3, 29:30)
+labels(crops) <- c(sec6c1 = "Name of crop grown", 
+                   sec6c2 = "Trend in proportion under this croop", 
+                   sec6c3 =  "Explain the change in land size", 
+                   sec6c4 = "Production levels in 2009", 
+                   sec6c5 = "Explain the change in production")
+
+
+# SECTION D: CROP PRODUCTION -CHANGING PREFERENCES ------------------------
+
+sam_data_011 <- read_excel("sam_data_001.xlsx", sheet = 11) %>% 
+  clean_names()
+crops_1980  <- sam_data_011 %>% 
+  select(1:2)
+labels(crops_1980) <- c(sec6d_sec6d1 = "Crop dropped since 1980", 
+                        sec6d_sec6d2 = "Why was the crop dropped" )
+
+
+# SECTION 6D: CROP PRODUCTION AND PREFERENCES ADOPTED ---------------------
+sam_data_012 <- read_excel("sam_data_001.xlsx", sheet = 12) %>% 
+  clean_names()
+crops_1980a  <- sam_data_012 %>% 
+  select(1:2)
+labels(crops_1980a) <- c(sec6dd_sec6d3 = "Crop dropped since 1980", 
+                        sec6dd_sec6d4 = "Why was the crop dropped" )
+
+
+>>>>>>> a692a78cfd41202e2b4ba0256cfb8a5b130bd3fc
