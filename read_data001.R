@@ -5,7 +5,7 @@ library(janitor)
 library(openxlsx)
 library(gt)
 library(arsenal)
-
+library(questionr)
 # LOAD DATA --------
 
 
@@ -288,7 +288,7 @@ labels(crops_1980a) <- c(sec6dd_sec6d3 = "Crop dropped since 1980",
                         sec6dd_sec6d4 = "Why was the crop dropped" )
 
 
->>>>>>> a692a78cfd41202e2b4ba0256cfb8a5b130bd3fc
+
 
 # SECTION 7A: WATERSHED CONDITION AND MANAGEMENT --------------------------
 
@@ -304,4 +304,67 @@ sam_data_013 <- sam_data_013 %>%
          `Observed_in_comm` = sec7a_sec7a2,
          `Observed_in_own_field` = sec7a_sec7a3,
          `Prevention_measure` = sec7a_sec7a4)
+
+labels(sam_data_013) = c(
+  Type_of_change = "Type of change",
+  Observed_in_comm = "Change observed in community",
+  Observed_in_own_field = "Change observed in own field",
+  Prevention_measures = "Prevention measure"
+)
+
+
+# SECTION 7B: WATERSHED CONDITION AND MANAGEMENT - INSTITUTIONS -----------
+
+sam_data_014 <- read_excel("sam_data_001.xlsx", sheet = 14) %>% 
+  clean_names() %>% select(sec7b_sec7b2,
+                           sec7b_sec7b3,
+                           sec7b_sec7b4,
+                           sec7b_sec7b5,
+                           sec7b_sec7b6
+
+)
+
+sam_data_014 <- sam_data_014 %>% 
+  rename(`Rule` = sec7b_sec7b2,
+         `Awareness` = sec7b_sec7b3,
+         `Enforcer` = sec7b_sec7b4,
+         `Compliance` = sec7b_sec7b5,
+         `Non_compliance_rsn` = sec7b_sec7b6)
+
+labels(sam_data_014) = c(
+  Rule = "Rule",
+  Awareness = "Are you aware of the rule?",
+  Enforcer = "Who enforces the rule?",
+  Compliance = "Do you comply?",
+  Non_compliance_rsn = "Reason for not complying"
+)
+
+
+# SECTION 9: HOUSEHOLD LIVELIHOOD STRATEGIES ------------------------------
+
+
+sam_data_016 <- read_excel("sam_data_001.xlsx", sheet = 16) %>% 
+  clean_names()
+
+sam_data_016 <-
+  left_join(pt, sam_data_016, by = c("index" = "parent_index")) %>%
+  select(genderhousehold, sec9_sec9q1,	sec9_sec9q2,
+         sec9_sec9q3,	sec9_sec9q4)
+ sam_data_016 <- sam_data_016 %>% 
+   rename(`Livelihood_source` = sec9_sec9q1,
+          `Is_it_a_source` = sec9_sec9q2,
+          `No_of_hh_members` = sec9_sec9q3,
+          `Viability` = sec9_sec9q4)
+labels(sam_data_016) = c(
+  Livelihood_source = "Source of livelihood",
+  Is_it_a_source = "Is this a source for the hh",
+  No_of_hh_members = "No. of hh members involved",
+  Viability = "Viability in the past 5 years"
+)
+
+
+
+
+
+
 

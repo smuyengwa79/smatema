@@ -77,3 +77,8 @@ summary(tab8)
 tab9 <- tableby(Source ~ Programmes, data=sam_data_007)
 summary(tab9)
 ```
+
+```{r table10, results='asis'}
+tab10 <- tableby(Enforcer ~., data=sam_data_014)
+summary(tab10)
+```
