@@ -129,30 +129,10 @@ sam_data_006 <- read_excel("sam_data_001.xlsx", sheet = 6) %>%
 sam_data_007 <- read_excel("sam_data_001.xlsx", sheet = 7) %>% 
   clean_names()
 
-sam_data_007$section5_sec5q2_rec <- fct_recode(sam_data_007$section5_sec5q2,
-                                               "Social Welfare" = "Social walfare",
-                                               "Government" = "Gvt",
-                                               "BEAM" = "Beam",
-                                               "Social Welfare" = "Social welfare",
-                                               "Agritex" = "Agritex Officers",
-                                               "Vet Services" = "Veterinary Services",
-                                               "Vet Services" = "Vetinary services",
-                                               "Agritex" = "Agritex Officer",
-                                               "Vet Services" = "Veterinary Officers",
-                                               "Vet Services" = "Veterinary",
-                                               "Donors" = "USAID",
-                                               "Agritex" = "Agritex officers",
-                                               "Donors" = "NAC",
-                                               "Agritex" = "Arex",
-                                               "Donors" = "NGO",
-                                               "Agritex" = "Agritex offices",
-                                               "Vet Services" = "Verterinary services",
-                                               "Donors" = "Usaid",
-                                               "Donors" = "WfP",
-                                               "Government" = "GVT",
-                                               "Donors" = "Dor"
-)
-
+abt <-sam_data_007 %>% 
+  select(1:2)
+labels(abt) <- c(section4c_sec4c1a = "Is there a sacred bird, tree, animal?", 
+                 section4c_sec4c1b = "Indicate the name")
 
 # SECTION 6: LAND  --------------------------------------------------------
 
@@ -187,4 +167,37 @@ land <- land %>%
          `Form_of_Degradation` = plot_questions_sec6a9b,
          `Extent_of_Degradation` = plot_questions_sec6a10,
          `Manage` = plot_questions_sec6a11)
+
+
+programs <- read_excel("sam_data_001.xlsx", sheet = 7) %>% 
+  clean_names()
+
+programs <- left_join(pt, programs, by = c("index" = "parent_index"))%>% 
+  select(genderhousehold, section5_sec5q1, section5_sec5q2, section5_sec5q3,
+         section5_sec5q4, section5_sec5q5, section5_sec5q6, section5_sec5q7,
+         section5_sec5q8, section5_sec5q9)
+
+programs <- programs %>% 
+  rename(`Programmes` = section5_sec5q1,
+         `Source` = section5_sec5q2,
+         `Did_HH_Travel` = section5_sec5q3,
+         `HH_Member_Travelled` = section5_sec5q4,
+         `Where_travelled` = section5_sec5q5,
+         `Form_of_Transport` = section5_sec5q6,
+         `Distance_in_km` = section5_sec5q7,
+         `Duration_in_minutes` = section5_sec5q8,
+         `Cost_of_Transport` = section5_sec5q9)
+
+labels(programs) = c(
+  Programmes = "Services and programmes",
+  Source = "Who provided support?",
+  Did_HH_Travel = "Did hh member travelled to get suppot?",
+  HH_Member_Travelled = "Who travelled?",
+  Where_travelled = "Where did he/she travelled?",
+  Form_of_Transport = "Form of transport used",
+  Distance_in_km = "Distance in kilometres",
+  Duration_in_minutes = "Time taken in minutes",
+  Cost_of_Transport = "Cost of transport"
+  
+)
 
