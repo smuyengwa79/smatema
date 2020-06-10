@@ -94,3 +94,38 @@ sam_data_004 <- read_excel("sam_data_001.xlsx", sheet = 4)
 names(sam_data_004) <- gsub("sec3b/", "", names(sam_data_004))
 adaptation <- sam_data_004 %>% 
   select(sec3b1, 5:18)
+
+land <- read_excel("sam_data_001.xlsx", sheet = 8) %>% 
+  clean_names()
+land <- land %>% 
+  select(c(-3, -11:-17, -20:-39))
+
+labels(land) = c(
+  plot_questions_plot_id = "Plot Number",
+  plot_questions_sec6a2	= "Type of Land",
+  plot_questions_sec6a4	= "Irrigated",
+  plot_questions_sec6a5	= "Tenure",
+  plot_questions_sec6a6	= "Land Acquired Through",
+  plot_questions_sec6a7 = "Principal Use",
+  plot_questions_sec6a8 = "Crops Rotated",
+  plot_questions_sec6a9a = "Degradation",	
+  plot_questions_sec6a9b = "Form of Degradation",
+  plot_questions_sec6a10 = "Extent of Degradation",
+  plot_questions_sec6a11 = "Manager"
+)
+
+land <- land %>% 
+  rename(`Plot_Number` = plot_questions_plot_id,
+         `Type_of_Land` = plot_questions_sec6a2,
+         `Irrigated` = plot_questions_sec6a4,
+         `Tenure` = plot_questions_sec6a5,
+         `Land_Acquired_Through` = plot_questions_sec6a6,
+         `Principal_Use` = plot_questions_sec6a7,
+         `Crops_Rotated` = plot_questions_sec6a8,
+         `Degradation` = plot_questions_sec6a9a,
+         `Form_of_Degradation` = plot_questions_sec6a9b,
+         `Extent_of_Degradation` = plot_questions_sec6a10,
+         `Manage` = plot_questions_sec6a11)
+
+programs <- read_excel("sam_data_001.xlsx", sheet = 7) %>% 
+  clean_names()
