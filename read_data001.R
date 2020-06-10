@@ -129,3 +129,32 @@ land <- land %>%
 
 programs <- read_excel("sam_data_001.xlsx", sheet = 7) %>% 
   clean_names()
+
+programs <- left_join(pt, programs, by = c("index" = "parent_index"))%>% 
+  select(genderhousehold, section5_sec5q1, section5_sec5q2, section5_sec5q3,
+         section5_sec5q4, section5_sec5q5, section5_sec5q6, section5_sec5q7,
+         section5_sec5q8, section5_sec5q9)
+
+programs <- programs %>% 
+  rename(`Programmes` = section5_sec5q1,
+         `Source` = section5_sec5q2,
+         `Did_HH_Travel` = section5_sec5q3,
+         `HH_Member_Travelled` = section5_sec5q4,
+         `Where_travelled` = section5_sec5q5,
+         `Form_of_Transport` = section5_sec5q6,
+         `Distance_in_km` = section5_sec5q7,
+         `Duration_in_minutes` = section5_sec5q8,
+         `Cost_of_Transport` = section5_sec5q9)
+
+labels(programs) = c(
+  Programmes = "Services and programmes",
+  Source = "Who provided support?",
+  Did_HH_Travel = "Did hh member travelled to get suppot?",
+  HH_Member_Travelled = "Who travelled?",
+  Where_travelled = "Where did he/she travelled?",
+  Form_of_Transport = "Form of transport used",
+  Distance_in_km = "Distance in kilometres",
+  Duration_in_minutes = "Time taken in minutes",
+  Cost_of_Transport = "Cost of transport"
+  
+)
