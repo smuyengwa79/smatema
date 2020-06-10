@@ -68,3 +68,12 @@ summary(tab7)
 ```
 
 
+```{r table08, message=FALSE, echo=FALSE, results='asis'}
+tab8 <- tableby(genderhousehold ~ Programmes + Source, data=sam_data_007)
+summary(tab8)
+```
+
+```{r table09, message=FALSE, echo=FALSE, results='asis'}
+tab9 <- tableby(Source ~ Programmes, data=sam_data_007)
+summary(tab9)
+```

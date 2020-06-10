@@ -128,53 +128,9 @@ abt <-sam_data_006 %>%
 labels(abt) <- c(section4c_sec4c1a = "Is there a sacred bird, tree, animal?", 
                  section4c_sec4c1b = "Indicate the name")
 
-# SECTION 5: PROGRAMS -----------------------------------------------------
+# Section 5: Access to services and programmes ----------------------------
 
 sam_data_007 <- read_excel("sam_data_001.xlsx", sheet = 7) %>% 
-  clean_names()
-
-
-
-# SECTION 6: LAND  --------------------------------------------------------
-
-sam_data_008 <- read_excel("sam_data_001.xlsx", sheet = 8) %>% 
-  clean_names()
-land <- sam_data_008 %>% 
-  select(c(-3, -11:-17, -20:-39))
-
-labels(land) = c(
-  plot_questions_plot_id = "Plot Number",
-  plot_questions_sec6a2	= "Type of Land",
-  plot_questions_sec6a4	= "Irrigated",
-  plot_questions_sec6a5	= "Tenure",
-  plot_questions_sec6a6	= "Land Acquired Through",
-  plot_questions_sec6a7 = "Principal Use",
-  plot_questions_sec6a8 = "Crops Rotated",
-  plot_questions_sec6a9a = "Degradation",	
-  plot_questions_sec6a9b = "Form of Degradation",
-  plot_questions_sec6a10 = "Extent of Degradation",
-  plot_questions_sec6a11 = "Manager"
-)
-
-land <- land %>% 
-  rename(`Plot_Number` = plot_questions_plot_id,
-         `Type_of_Land` = plot_questions_sec6a2,
-         `Irrigated` = plot_questions_sec6a4,
-         `Tenure` = plot_questions_sec6a5,
-         `Land_Acquired_Through` = plot_questions_sec6a6,
-         `Principal_Use` = plot_questions_sec6a7,
-         `Crops_Rotated` = plot_questions_sec6a8,
-         `Degradation` = plot_questions_sec6a9a,
-         `Form_of_Degradation` = plot_questions_sec6a9b,
-         `Extent_of_Degradation` = plot_questions_sec6a10,
-         `Manage` = plot_questions_sec6a11)
-
-<<<<<<< HEAD
-sam_data_007 <- read_excel("sam_data_001.xlsx", sheet = 7) %>% 
-=======
-
-programs <- read_excel("sam_data_001.xlsx", sheet = 7) %>% 
->>>>>>> a692a78cfd41202e2b4ba0256cfb8a5b130bd3fc
   clean_names()
 
 sam_data_007 <- left_join(pt, sam_data_007, by = c("index" = "parent_index"))%>% 
@@ -183,29 +139,29 @@ sam_data_007 <- left_join(pt, sam_data_007, by = c("index" = "parent_index"))%>%
          section5_sec5q8, section5_sec5q9)
 
 sam_data_007$section5_sec5q2 <- fct_recode(sam_data_007$section5_sec5q2,
-                                           "Social Welfare" = "Social walfare",
-                                           "Government" = "Gvt",
-                                           "BEAM" = "Beam",
-                                           "Social Welfare" = "Social welfare",
-                                           "Agritex" = "Agritex Officers",
-                                           "Vet Services" = "Veterinary Services",
-                                           "Vet Services" = "Vetinary services",
-                                           "Agritex" = "Agritex Officer",
-                                           "Vet Services" = "Veterinary Officers",
-                                           "Vet Services" = "Veterinary",
-                                           "Donors" = "USAID",
-                                           "Agritex" = "Agritex officers",
-                                           "Donors" = "NAC",
-                                           "Agritex" = "Arex",
-                                           "Donors" = "NGO",
-                                           "Agritex" = "Agritex offices",
-                                           "Vet Services" = "Verterinary services",
-                                           "Donors" = "Usaid",
-                                           "Donors" = "WfP",
-                                           "Donors" = "Donor",
-                                           "Government" = "GVT",
-                                           "Donors" = "Dor",
-                                           "Vet Services" = "Vertinary"
+                                               "Social Welfare" = "Social walfare",
+                                               "Government" = "Gvt",
+                                               "BEAM" = "Beam",
+                                               "Social Welfare" = "Social welfare",
+                                               "Agritex" = "Agritex Officers",
+                                               "Vet Services" = "Veterinary Services",
+                                               "Vet Services" = "Vetinary services",
+                                               "Agritex" = "Agritex Officer",
+                                               "Vet Services" = "Veterinary Officers",
+                                               "Vet Services" = "Veterinary",
+                                               "Donors" = "USAID",
+                                               "Agritex" = "Agritex officers",
+                                               "Donors" = "NAC",
+                                               "Agritex" = "Arex",
+                                               "Donors" = "NGO",
+                                               "Agritex" = "Agritex offices",
+                                               "Vet Services" = "Verterinary services",
+                                               "Donors" = "Usaid",
+                                               "Donors" = "WfP",
+                                               "Donors" = "Donor",
+                                               "Government" = "GVT",
+                                               "Donors" = "Dor",
+                                               "Vet Services" = "Vertinary"
 )
 
 sam_data_007 <- sam_data_007 %>% 
@@ -232,8 +188,74 @@ labels(sam_data_007) = c(
   
 )
 
-<<<<<<< HEAD
-=======
+
+
+
+# SECTION 6A: LAND  --------------------------------------------------------
+
+sam_data_008 <- read_excel("sam_data_001.xlsx", sheet = 8) %>% 
+  clean_names()
+sam_data_008 <- sam_data_008 %>% 
+  select(c(-3, -11:-17, -20:-39))
+
+labels(sam_data_008) = c(
+  plot_questions_plot_id = "Plot Number",
+  plot_questions_sec6a2	= "Type of Land",
+  plot_questions_sec6a4	= "Irrigated",
+  plot_questions_sec6a5	= "Tenure",
+  plot_questions_sec6a6	= "Land Acquired Through",
+  plot_questions_sec6a7 = "Principal Use",
+  plot_questions_sec6a8 = "Crops Rotated",
+  plot_questions_sec6a9a = "Degradation",	
+  plot_questions_sec6a9b = "Form of Degradation",
+  plot_questions_sec6a10 = "Extent of Degradation",
+  plot_questions_sec6a11 = "Manager"
+)
+
+sam_data_008 <- sam_data_008 %>% 
+  rename(`Plot_Number` = plot_questions_plot_id,
+         `Type_of_Land` = plot_questions_sec6a2,
+         `Irrigated` = plot_questions_sec6a4,
+         `Tenure` = plot_questions_sec6a5,
+         `Land_Acquired_Through` = plot_questions_sec6a6,
+         `Principal_Use` = plot_questions_sec6a7,
+         `Crops_Rotated` = plot_questions_sec6a8,
+         `Degradation` = plot_questions_sec6a9a,
+         `Form_of_Degradation` = plot_questions_sec6a9b,
+         `Extent_of_Degradation` = plot_questions_sec6a10,
+         `Who_Manage_the_field` = plot_questions_sec6a11)
+
+
+
+# Section 6B: Crop Production - Last Rainy Season (2018/2019) -------------
+
+sam_data_009 <- read_excel("sam_data_001.xlsx", sheet = 9) %>% 
+  clean_names() %>% select(sec6b_sec6b2,	sec6b_sec6b3,
+                           sec6b_sec6b4,	sec6b_sec6b5,
+                           sec6b_sec6b6,	sec6b_sec6b7,
+                           sec6b_sec6b8,	sec6b_sec6b8a,
+                           sec6b_sec6b8b,	sec6b_sec6b9,
+                           sec6b_sec6b9a,	sec6b_sec6b9b
+                           )
+
+sam_data_009 <- sam_data_009 %>% 
+  rename(`Plot_Id` = sec6b_sec6b2,
+         `Crop` = sec6b_sec6b3,
+         `Type_of_Crop_Stand` = sec6b_sec6b4,
+         `Entire_Plot` = sec6b_sec6b5,
+         `Area_Under_Crop` = sec6b_sec6b6,
+         `Seed_Variety` = sec6b_sec6b7
+         )
+## Recoding sam_data_009$sec6b_sec6b8 into sam_data_009$Total_Harvest_in_kgs
+sam_data_009$Total_Harvest_in_kgs <- fct_recode(sam_data_009$sec6b_sec6b8,
+   "90" = "90Kg Bag",
+   "25" = "25 Kg Bag",
+   "1" = "Kilogram",
+   "50" = "50 Kg Bag",
+   "75" = "75Kg Bag"
+ )
+
+
 
 # SECTION 6C: CROP PRODUCTION-MAJOR CROP & PRODUCTION ---------------------
 sam_data_010 <- read_excel("sam_data_001.xlsx", sheet = 10) %>% 
@@ -267,3 +289,19 @@ labels(crops_1980a) <- c(sec6dd_sec6d3 = "Crop dropped since 1980",
 
 
 >>>>>>> a692a78cfd41202e2b4ba0256cfb8a5b130bd3fc
+
+# SECTION 7A: WATERSHED CONDITION AND MANAGEMENT --------------------------
+
+sam_data_013 <- read_excel("sam_data_001.xlsx", sheet = 13) %>% 
+  clean_names() %>% select(sec7a_sec7a1,
+                           sec7a_sec7a2,
+                           sec7a_sec7a3,
+                           sec7a_sec7a4
+)
+
+sam_data_013 <- sam_data_013 %>% 
+  rename(`Type_of_change` = sec7a_sec7a1,
+         `Observed_in_comm` = sec7a_sec7a2,
+         `Observed_in_own_field` = sec7a_sec7a3,
+         `Prevention_measure` = sec7a_sec7a4)
+
