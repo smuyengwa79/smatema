@@ -68,9 +68,10 @@ summary(tab7)
 ```
 
 
+<<<<<<< HEAD
 ## Section 4C: Sacred animals, birds, and animals
 
-```{r table08, results='asis'}
+```{r table08ab, results='asis'}
 tab8 <- tableby(section4c_sec4c1a ~., data=abt)
 summary(tab8)
 ```
@@ -78,14 +79,14 @@ summary(tab8)
 
 ## Section 6C: Crop production major crops grown and production levels 
 
-```{r table09, results='asis'}
+```{r table09ab, results='asis'}
 tab09 <- tableby(sec6c1 ~., data=crops)
 summary(tab09)
 ```
 
 ## Section 6D: Crop production-dropped since 1980
 
-```{r table10, results='asis'}
+```{r table10ab, results='asis'}
 tab010 <- tableby(sec6d_sec6d1 ~., data=crops_1980)
 summary(tab010)
 ```
@@ -93,8 +94,24 @@ summary(tab010)
 
 ## Section 6D: Crop production-adopted since 1980
 
-```{r table011}
+```{r table011a}
 tab011 <- tableby(sec6dd_sec6d3 ~., data=crops_1980a)
 summary(tab011)
 ```
 
+=======
+```{r table08a, message=FALSE, echo=FALSE, results='asis'}
+tab8 <- tableby(genderhousehold ~ Programmes + Source, data=sam_data_007)
+summary(tab8)
+```
+
+```{r table09a, message=FALSE, echo=FALSE, results='asis'}
+tab9 <- tableby(Source ~ Programmes, data=sam_data_007)
+summary(tab9)
+```
+
+```{r table10a, results='asis'}
+tab10 <- tableby(Enforcer ~., data=sam_data_014)
+summary(tab10)
+```
+>>>>>>> ae1aa9e705fe62ea9514e0cba0c698a09cede8ae
