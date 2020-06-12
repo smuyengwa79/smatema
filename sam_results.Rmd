@@ -69,18 +69,51 @@ summary(tab7)
 
 ## Section 5: Access to programmes and services by gender of household
 
-```{r table08, message=FALSE, echo=FALSE, results='asis'}
-tab8 <- tableby(genderhousehold ~ Programmes + Source, data=sam_data_007)
+```{r table16, message=FALSE, echo=FALSE, results='asis'}
+tab16 <- tableby(genderhousehold ~ Programmes + Source, data=sam_data_007)
+summary(tab16)
+```
+
+<<<<<<< HEAD
+## Section 4C: Sacred animals, birds, and animals
+
+```{r table08, results='asis'}
+tab8 <- tableby(section4c_sec4c1a ~., data=abt)
 summary(tab8)
 ```
 
-## Section 5: Sources of programmes and services
 
-```{r table09, message=FALSE, echo=FALSE, results='asis'}
-tab9 <- tableby(Source ~ Programmes, data=sam_data_007)
-summary(tab9)
+## Section 6C: Crop production major crops grown and production levels 
+
+```{r table09ab, results='asis'}
+tab09 <- tableby(sec6c1 ~., data=crops)
+summary(tab09)
 ```
 
+## Section 6D: Crop production-dropped since 1980
+
+```{r table10ab, results='asis'}
+tab010 <- tableby(sec6d_sec6d1 ~., data=crops_1980)
+summary(tab010)
+```
+
+
+## Section 6D: Crop production-adopted since 1980
+
+```{r table011a}
+tab011 <- tableby(sec6dd_sec6d3 ~., data=crops_1980a)
+summary(tab011)
+```
+
+<<<<<<< HEAD
+## Section 5: Sources of programmes and services
+
+```{r table15, message=FALSE, echo=FALSE, results='asis'}
+tab15 <- tableby(Source ~ Programmes, data=sam_data_007)
+summary(tab15)
+```
+
+<<<<<<< HEAD
 ## Section 7B: Awareness
 
 ```{r table10, message=FALSE, echo=FALSE, results='asis'}
@@ -115,3 +148,10 @@ summary(tab13)
 tab14 <- tableby(Does_hh_sell ~ Product, data=sam_data_017)
 summary(tab14)
 ```
+=======
+```{r table10a, results='asis'}
+tab10 <- tableby(Enforcer ~., data=sam_data_014)
+summary(tab10)
+```
+>>>>>>> ae1aa9e705fe62ea9514e0cba0c698a09cede8ae
+>>>>>>> f43b29714a233655e5a647ca903abc5da22cd0f7
