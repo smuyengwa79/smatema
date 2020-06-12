@@ -363,6 +363,31 @@ labels(sam_data_016) = c(
 )
 
 
+# SECTION 10: FOREST RESOURCES DEPENDENCE ---------------------------------
+
+sam_data_017 <- read_excel("sam_data_001.xlsx", sheet = 17) %>% 
+  clean_names() %>% select(section10_forestproduct,	section10_sec10a1,
+                           section10_sec10a2,	section10_sec10a3,
+                           section10_sec10a4,	section10_sec10a5,
+                           section10_sec10a6)
+
+sam_data_017 <- sam_data_017 %>% 
+  rename(`Product` = section10_forestproduct,
+         `Does_hh_consume` = section10_sec10a1,
+         `Time_of_year` = section10_sec10a2,
+         `Does_hh_sell` = section10_sec10a3,
+         `Time_of_year_s` = section10_sec10a4,
+         `Who_sells` = section10_sec10a5,
+         `How_much` = section10_sec10a6)
+
+labels(sam_data_017) = c(
+  Product = "Forest Product",
+  Does_hh_consume = "Does your hh consume the product",
+  Time_of_year = "Time of main consumption",
+  Does_hh_sell = "Does your hh sell the product",
+  Time_of_year_s = "Time of main sales",
+  Who_sells = "Who sells the product"
+)
 
 
 

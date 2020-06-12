@@ -11,7 +11,7 @@ word_document:
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
-source('~/Rprogramming/Sam_Matema/read_data001.R', echo=FALSE)
+source('~/R/smatema/read_data001.R', echo=FALSE)
 
 ```
 
@@ -67,18 +67,51 @@ tab7 <- tableby(genderhousehold ~., data=iks2)
 summary(tab7)
 ```
 
+## Section 5: Access to programmes and services by gender of household
 
 ```{r table08, message=FALSE, echo=FALSE, results='asis'}
 tab8 <- tableby(genderhousehold ~ Programmes + Source, data=sam_data_007)
 summary(tab8)
 ```
 
+## Section 5: Sources of programmes and services
+
 ```{r table09, message=FALSE, echo=FALSE, results='asis'}
 tab9 <- tableby(Source ~ Programmes, data=sam_data_007)
 summary(tab9)
 ```
 
-```{r table10, results='asis'}
-tab10 <- tableby(Enforcer ~., data=sam_data_014)
+## Section 7B: Awareness
+
+```{r table10, message=FALSE, echo=FALSE, results='asis'}
+tab10 <- tableby(Awareness ~Rule, data=sam_data_014)
 summary(tab10)
+```
+
+## Section 7B: Compliance
+
+```{r table11, message=FALSE, echo=FALSE, results='asis'}
+tab11 <- tableby(Compliance ~Rule, data=sam_data_014)
+summary(tab11)
+```
+
+## Section 9: Source of livelihood by gender of household head
+
+```{r table12, message=FALSE, echo=FALSE, results='asis'}
+tab12 <- tableby(genderhousehold ~Livelihood_source, data=sam_data_016)
+summary(tab12)
+```
+
+## Section 10: Forest resources by time of main consumption during the year
+
+```{r table13, message=FALSE, echo=FALSE, results='asis'}
+tab13 <- tableby(Time_of_year ~ Product, data=sam_data_017)
+summary(tab13)
+```
+
+## Section 10: Forest resources by selling
+
+```{r table14, message=FALSE, echo=FALSE, results='asis'}
+tab14 <- tableby(Does_hh_sell ~ Product, data=sam_data_017)
+summary(tab14)
 ```
