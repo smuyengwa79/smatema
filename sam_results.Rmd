@@ -148,10 +148,32 @@ summary(tab13)
 tab14 <- tableby(Does_hh_sell ~ Product, data=sam_data_017)
 summary(tab14)
 ```
-=======
-```{r table10a, results='asis'}
-tab10 <- tableby(Enforcer ~., data=sam_data_014)
-summary(tab10)
+
+
+## Section 11B: Ecosystem services and goods - Benefits and costs of of living with wildlife
+
+```{r table17, results='asis'}
+tab17 <- tableby(Is_wildlife_important_to_you ~., data=sam_data_018)
+summary(tab17)
 ```
->>>>>>> ae1aa9e705fe62ea9514e0cba0c698a09cede8ae
->>>>>>> f43b29714a233655e5a647ca903abc5da22cd0f7
+
+## Section 11C: Ecosystems services and goods - Human wildlife interactions
+
+```{r table18, results='asis'}
+tab18 <- tableby(Time_of_year ~ Species, data=sam_data_019)
+summary(tab18)
+```
+
+## Section 11D: Trends in the quantity of product in the forest
+
+```{r table19, echo=FALSE, message=FALSE, results='asis'}
+tab19 <- tableby(sec11d_sec11d2 ~ sec11d_sec11d1, data=sam_data_020)
+summary(tab19)
+```
+
+## Section 11D: Trends in the quality of product in the forest
+
+```{r table20, echo=FALSE, message=FALSE, results='asis'}
+tab20 <- tableby(sec11d_sec11d3 ~ sec11d_sec11d1, data=sam_data_020)
+summary(tab20)
+```
