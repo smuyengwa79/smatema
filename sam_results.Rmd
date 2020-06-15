@@ -60,32 +60,66 @@ tab6 <- tableby(sec4a2 ~., data=iks)
 summary(tab6)
 ```
 
-When asked if these prediction systems are useful, the community members indicated the following: 
+## When asked if these prediction systems are useful, the community members indicated the following: 
 
 ```{r table07, results='asis'}
 tab7 <- tableby(genderhousehold ~., data=iks2)
 summary(tab7)
 ```
 
-## Section 5: Access to programmes and services by gender of household
+## Section 4C: Sacred animals, birds, and animals
+
+```{r table08, results='asis'}
+tab8 <- tableby(section4c_sec4c1a ~section4c_sec4c1b_rec, data=sam_data_006)
+summary(tab8)
+```
+
+## Section 5: Access to programmes and services by gender of household head
 
 ```{r table16, message=FALSE, echo=FALSE, results='asis'}
 tab16 <- tableby(genderhousehold ~ Programmes + Source, data=sam_data_007)
 summary(tab16)
 ```
 
-<<<<<<< HEAD
-## Section 4C: Sacred animals, birds, and animals
+## Section 5: Sources of programmes and services
 
-```{r table08, results='asis'}
-tab8 <- tableby(section4c_sec4c1a ~., data=abt)
-summary(tab8)
+```{r table15, message=FALSE, echo=FALSE, results='asis'}
+tab15 <- tableby(Source ~ Programmes, data=sam_data_007)
+summary(tab15)
 ```
 
 
+## Section 6A: Principal use and degradation by type of land
+
+```{r table27, message=FALSE, echo=FALSE, results='asis'}
+tab27 <- tableby(Type_of_Land ~Principal_Use + Degradation, data=sam_data_008)
+summary(tab27)
+```
+
+## Section 6A: Form of degradation by type of land
+
+```{r table28, message=FALSE, echo=FALSE, results='asis'}
+tab28 <- tableby(Type_of_Land ~Form_of_Degradation, data=sam_data_008)
+summary(tab28)
+```
+
+## Section 6B: Crop production - Total Harvest by type of seed
+
+```{r table29, message=FALSE, echo=FALSE, results='asis'}
+tab29 <- tableby(Seed_Variety ~Total_Harvest_in_kgs_, data=sam_data_009)
+summary(tab29)
+```
+
+## Section 6B: Crop production - Total Harvest by type of crop stand
+
+```{r table30, message=FALSE, echo=FALSE, results='asis'}
+tab30 <- tableby(Type_of_Crop_Stand ~Total_Harvest_in_kgs_, data=sam_data_009)
+summary(tab30)
+```
+
 ## Section 6C: Crop production major crops grown and production levels 
 
-```{r table09ab, results='asis'}
+```{r table09ab, message=FALSE, echo=FALSE, results='asis'}
 tab09 <- tableby(sec6c1 ~., data=crops)
 summary(tab09)
 ```
@@ -100,20 +134,18 @@ summary(tab010)
 
 ## Section 6D: Crop production-adopted since 1980
 
-```{r table011a}
+```{r table011, message=FALSE, echo=FALSE, results='asis'}
 tab011 <- tableby(sec6dd_sec6d3 ~., data=crops_1980a)
 summary(tab011)
 ```
 
-<<<<<<< HEAD
-## Section 5: Sources of programmes and services
+## Section 7A: Enviromental changes noticed 
 
-```{r table15, message=FALSE, echo=FALSE, results='asis'}
-tab15 <- tableby(Source ~ Programmes, data=sam_data_007)
-summary(tab15)
+```{r table31, message=FALSE, echo=FALSE, results='asis'}
+tab31 <- tableby(Observed_in_comm ~Type_of_change + Prevention_measure, data=sam_data_013)
+summary(tab31)
 ```
 
-<<<<<<< HEAD
 ## Section 7B: Awareness
 
 ```{r table10, message=FALSE, echo=FALSE, results='asis'}
@@ -126,6 +158,13 @@ summary(tab10)
 ```{r table11, message=FALSE, echo=FALSE, results='asis'}
 tab11 <- tableby(Compliance ~Rule, data=sam_data_014)
 summary(tab11)
+```
+
+## Section 8: Household assets - livestock
+
+```{r table32, message=FALSE, echo=FALSE, results='asis'}
+tab32 <- tableby(sec8a_sec8a2 ~., data=sam_data_015)
+summary(tab32)
 ```
 
 ## Section 9: Source of livelihood by gender of household head
@@ -152,7 +191,7 @@ summary(tab14)
 
 ## Section 11B: Ecosystem services and goods - Benefits and costs of of living with wildlife
 
-```{r table17, results='asis'}
+```{r table17, message=FALSE, echo=FALSE, results='asis'}
 tab17 <- tableby(Is_wildlife_important_to_you ~., data=sam_data_018)
 summary(tab17)
 ```
@@ -160,7 +199,7 @@ summary(tab17)
 ## Section 11C: Ecosystems services and goods - Human wildlife interactions
 
 ```{r table18, results='asis'}
-tab18 <- tableby(Time_of_year ~ Species, data=sam_data_019)
+tab18 <- tableby(Time_of_year ~ Species_rec, data=sam_data_019)
 summary(tab18)
 ```
 
@@ -176,4 +215,46 @@ summary(tab19)
 ```{r table20, echo=FALSE, message=FALSE, results='asis'}
 tab20 <- tableby(sec11d_sec11d3 ~ sec11d_sec11d1, data=sam_data_020)
 summary(tab20)
+```
+
+## Section 11E: Type of forest by ....
+
+```{r table21, echo=FALSE, message=FALSE, results='asis'}
+tab21 <- tableby(sec11e_sec11e4 ~ sec11e_sec11e2, data=sam_data_021)
+summary(tab21)
+```
+
+## Section 11E: Type of forest by partnership
+
+```{r table22, echo=FALSE, message=FALSE, results='asis'}
+tab22 <- tableby(sec11e_sec11e5 ~ sec11e_sec11e2, data=sam_data_021)
+summary(tab22)
+```
+
+## Section 11E: Are you paid for planting trees
+
+```{r table23, echo=FALSE, message=FALSE, results='asis'}
+tab23 <- tableby(sec11e_sec11e2 ~ sec11e_sec11e6, data=sam_data_021)
+summary(tab23)
+```
+
+## Section 12: Source of energy by use
+
+```{r table24, echo=FALSE, message=FALSE, results='asis'}
+tab24 <- tableby(sec12_sec12 ~ sec12_sec12_1, data=sam_data_022)
+summary(tab24)
+```
+
+## Section 12: How to obtain source of energy
+
+```{r table25, echo=FALSE, message=FALSE, results='asis'}
+tab25 <- tableby(sec12_sec12 ~ sec12_sec12_2, data=sam_data_022)
+summary(tab25)
+```
+
+## Section 12: Affordability of energy sources
+
+```{r table26, echo=FALSE, message=FALSE, results='asis'}
+tab26 <- tableby(sec12_sec12 ~ sec12_sec12_3, data=sam_data_022)
+summary(tab26)
 ```

@@ -6,6 +6,7 @@ library(openxlsx)
 library(gt)
 library(arsenal)
 library(questionr)
+
 # LOAD DATA --------
 
 
@@ -65,7 +66,7 @@ roster <- sam_data_002 %>%
 fs <- sam_data_001 %>%
   select(genderhousehold, contains("sec2"))
 fs <- fs %>%
-  select(-3,-11)
+  select(-3, -11)
 names(fs) <- gsub("sec2q2_", "", names(fs))
 labels(fs) <-
   c(sec2q1 = "In the past 5 years, where there years you did not have enough food to meet your family needs ",
@@ -123,6 +124,36 @@ sacred_sites <- sam_data_001 %>%
 
 sam_data_006 <- read_excel("sam_data_001.xlsx", sheet = 6) %>%
   clean_names()
+
+## Recoding sam_data_006$section4c_sec4c1b into sam_data_006$section4c_sec4c1b_rec
+sam_data_006$section4c_sec4c1b_rec <-
+  fct_recode(
+    sam_data_006$section4c_sec4c1b,
+    "Mariti" = "Manti",
+    "Mishumbi, Mukwakwa" = "Mishumbi ne Mukwakwa",
+    "Jackal" = "Gava",
+    "Mariti, Mbira" = "Mariti Mbira",
+    "Mbira" = "mbira",
+    "Mariti, Kowiro" = "Mariti, kowiro",
+    "Baboon, Jackal, Mbira" = "Mbira,  Gava,  Gudo",
+    "Baboon,  Chikovo" = "Baboon,  chikovo",
+    "Mariti, Dendera, Kowiro" = "Riti/Dendera,kowiro",
+    "Jackal" = "Gava/Jackle",
+    "Jichidza" = "Majijidza",
+    "Mariti, Kowiro" = "Kowiri, Mariti",
+    "Mariti, Kowiro" = "Mariti , kowiro",
+    "Jackal, Fox" = "Gava/Fox",
+    "Dendera" = "Matendera",
+    "Mariti" = "Riti",
+    "Kowiro, Owls, Masongano" = "Kowiro, Owls Masongano",
+    "Owl" = "Owls",
+    "Hyena" = "Hyenas",
+    "Baboon" = "Baboons",
+    "Mukamba, Mukwa, Mutuwa trees" = "Mukamba tree(Mukwa tree),Mutuwa",
+    "Mutuwa, Mubvumira, Mukamba trees" = "Mutuwa/mubvumira/ mukamba trees"
+  )
+
+
 abt <- sam_data_006 %>%
   select(1:2)
 labels(abt) <-
@@ -211,7 +242,7 @@ labels(sam_data_007) = c(
 sam_data_008 <- read_excel("sam_data_001.xlsx", sheet = 8) %>%
   clean_names()
 sam_data_008 <- sam_data_008 %>%
-  select(c(-3,-11:-17,-20:-39))
+  select(c(-3, -11:-17, -20:-39))
 
 labels(sam_data_008) = c(
   plot_questions_plot_id = "Plot Number",
@@ -290,13 +321,43 @@ sam_data_009$Expected_Harvest_in_kgs <-
     "1" = "Kilogram",
     "50" = "50 Kg Bag",
     "75" = "75Kg Bag"
-  )
+  )## Recoding sam_data_009$Total_Harvest_in_kgs into sam_data_009$Total_Harvest_in_kgs_rec
+sam_data_009$Total_Harvest_in_kgs_rec <- fct_recode(sam_data_009$Total_Harvest_in_kgs,
+  "25.0" = "25",
+  "50.0" = "50",
+  "75.0" = "75",
+  "90.0" = "90",
+  "1.0" = "1"
+)
+sam_data_009$Total_Harvest_in_kgs_rec <- fct_explicit_na(sam_data_009$Total_Harvest_in_kgs_rec, "0")
+sam_data_009$Total_Harvest_in_kgs_rec <- as.numeric(as.character(sam_data_009$Total_Harvest_in_kgs_rec))
 
-typeof(sam_data_009$Total_Harvest_in_kgs)
-as.integer(sam_data_009$Total_Harvest_in_kgs)
-typeof(sam_data_009$sec6b_sec6b8a)
-sam_data_009$Total_Harvest_in_kgs <-
-  (as.double(sam_data_009$Total_Harvest_in_kgs) * sam_data_009$sec6b_sec6b8a)
+## Recoding sam_data_009$sec6b_sec6b8a into sam_data_009$sec6b_sec6b8a_rec
+sam_data_009$sec6b_sec6b8a_rec <- as.character(sam_data_009$sec6b_sec6b8a)
+sam_data_009$sec6b_sec6b8a_rec <- fct_recode(sam_data_009$sec6b_sec6b8a_rec,
+  "1.0" = "1",
+  "2.0" = "2",
+  "0.0" = "0",
+  "3.0" = "3",
+  "4.0" = "4",
+  "6.0" = "6",
+  "7.0" = "7",
+  "500.0" = "500",
+  "350.0" = "350",
+  "260.0" = "260",
+  "200.0" = "200",
+  "100.0" = "100",
+  "50.0" = "50",
+  "9.0" = "9",
+  "5.0" = "5",
+  "20.0" = "20",
+  "15.0" = "15",
+  "12.0" = "12"
+)
+sam_data_009$sec6b_sec6b8a_rec <- fct_explicit_na(sam_data_009$sec6b_sec6b8a_rec, "0.0")
+sam_data_009$sec6b_sec6b8a_rec <- as.numeric(as.character(sam_data_009$sec6b_sec6b8a_rec))
+
+sam_data_009$Total_Harvest_in_kgs_ <- (sam_data_009$Total_Harvest_in_kgs_rec * sam_data_009$sec6b_sec6b8a_rec)
 
 # SECTION 6C: CROP PRODUCTION-MAJOR CROP & PRODUCTION ---------------------
 sam_data_010 <- read_excel("sam_data_001.xlsx", sheet = 10) %>%
@@ -381,6 +442,38 @@ labels(sam_data_014) = c(
   Enforcer = "Who enforces the rule?",
   Compliance = "Do you comply?",
   Non_compliance_rsn = "Reason for not complying"
+)
+
+
+# Section 8A: Household Assets - Livestock --------------------------------
+
+sam_data_015 <- read_excel("sam_data_001.xlsx", sheet = 15) %>%
+  clean_names() %>% select(
+    sec8a_sec8a2,
+    sec8a_sec8a3,
+    sec8a_sec8a4,
+    sec8a_sec8a5,
+    sec8a_sec8a6,
+    sec8a_sec8a7,
+    sec8a_sec8a8,
+    sec8a_sec8a9,
+    sec8a_sec8a10,
+    sec8a_sec8a11
+    
+  )
+  
+labels(sam_data_015) = c(
+  sec8a_sec8a2 = "Livestock",
+  sec8a_sec8a3 = "How many do you own?",
+  sec8a_sec8a4 = "Who owns?",
+  sec8a_sec8a5 = "How many consumed?",
+  sec8a_sec8a6 = "How many bought?",
+  sec8a_sec8a7 = "How much paid",
+  sec8a_sec8a8 = "How many lost through diseases",
+  sec8a_sec8a9 = "How many lost through predation",
+  sec8a_sec8a10 = "How many lost through theft",
+  sec8a_sec8a11 = "How many lost through other causes"
+  
 )
 
 
@@ -512,6 +605,57 @@ sam_data_019 <- sam_data_019 %>%
     `Why_not_happy` = sec11c_sec11c24,
     `Ideal_person` = sec11c_sec11c25
   )
+
+sam_data_019$Species_rec <- fct_recode(
+  sam_data_019$Species,
+  "Hyenas, Jackals" = "Jackle, hyena",
+  "Hyenas, Jackals, Fox" = "Jackles, hyenas, fox",
+  "Hyenas, Jackals" = "Jackles, hyenas",
+  "Hyenas" = "Hyena",
+  "Jackals" = "Jackles",
+  "Hyenas" = "Mapere",
+  "Snakes" = "Nyoka",
+  "Hyenas, Jackals" = "Hyena and Jackals",
+  "Hyenas, Jackals" = "Hyena and Jackle",
+  "Hyenas, Jackals" = "Hackles hyenas",
+  "Jackals" = "Kava",
+  "Hyenas, Jackals" = "Hyena and jackals",
+  "Hyenas, Jackals" = "hyena and jackal",
+  "Hyenas, Zvihaha" = "Mapere, Zvihaha",
+  "Hyenas, Jackals" = "Jackals  and  Hyena",
+  "Jackals" = "Gava",
+  "Chikovo" = "chikovo",
+  "Hyenas" = "Mapera",
+  "Hyenas, Jackals" = "Jackles hyena",
+  "Hyenas, Zvihaha" = "Mapere, Zvihahwe",
+  "Hyenas, Jackals" = "jackals  and hyena",
+  "Hyenas, Jackals, Snakes" = "Jackles\r\nNyoka\r\nMapere",
+  "Hyenas, Jackals" = "Jackles hyenas",
+  "Hyenas, Jackals, Fox" = "Hyenas \r\nFox\r\nJackles",
+  "Hyenas, Jackals, Fox" = "Jackles,hyenas,fox",
+  "Monkeys" = "Monkey",
+  "Hyenas, Jackals, Fox" = "Jackles hyenas,fox",
+  "Hyenas, Duikers, Hares" = "Mhembwe, Tsuro, Makava",
+  "Hyenas, Jackals" = "Jackles, Hyenas",
+  "Hyenas, Jackals, Fox" = "Jackles, Hyenas, Fox",
+  "Hyenas, Jackals, Fox" = "Hyenas, jackal,fox",
+  "Hyenas, Jackals, Fox" = "Hyenas, jackles, fox",
+  "Hyenas, Jackals, Fox" = "Hyena, jackals,fox",
+  "Hyenas, Jackals, Fox" = "Fox\r\nJackles\r\nHyenas",
+  "Hares" = "Hare",
+  "Hyenas, Jackals" = "Hyena,  jackles",
+  "Hyenas, Jackals" = "Hyenas,  jackles",
+  "Hyenas, Jackals" = "Jackles,  hyenas",
+  "Hyenas, Jackals" = "Hyner\r\nJackles",
+  "Hyenas, Jackals" = "Hyenas \r\nJackles",
+  "Duikers" = "Mhembwe",
+  "Hyenas, Jackals" = "Jackles \r\nHyenas",
+  "Hyenas, Jackals" = "Jackles \r\nHynas",
+  "Hares" = "Har",
+  "Hyenas, Fox" = "Hyenas \r\nFox"
+)
+
+
 labels(sam_data_019) = c(
   Species = "Animal Species",
   Presence = "How do you tell presence of this animal?",
@@ -552,4 +696,47 @@ labels(sam_data_020) = c(
   sec11d_sec11d8 = "Demand for product on the market",
   sec11d_sec11d9 = "Conflict over resource"
   
+)
+
+
+# Section 11E: Ecosystem services and goods - Forest management -----------
+
+sam_data_021 <- read_excel("sam_data_001.xlsx", sheet = 21) %>%
+  clean_names() %>% select(
+    sec11e_sec11e2,
+    sec11e_sec11e3,
+    sec11e_sec11e4,
+    sec11e_sec11e5,
+    sec11e_sec11e6,
+    sec11e_sec11e7,
+    sec11e_sec11e8
+  )
+
+labels(sam_data_021) = c(
+  sec11e_sec11e2 = "Type of forest",
+  sec11e_sec11e3 = "Number of trees planted",
+  sec11e_sec11e4 = "Where the tree was planted",
+  sec11e_sec11e5 = "Partner",
+  sec11e_sec11e6 = "Are you paid",
+  sec11e_sec11e7 = "How much if paid?",
+  sec11e_sec11e8 = "Is there a mngment committee"
+)
+
+
+# Section 12: Sources of energy -------------------------------------------
+
+sam_data_022 <- read_excel("sam_data_001.xlsx", sheet = 22) %>%
+  clean_names()
+
+sam_data_022 <- sam_data_022 %>%
+  select(sec12_sec12,
+         sec12_sec12_1,
+         sec12_sec12_2,
+         sec12_sec12_3)## Recoding sam_data_019$Species into sam_data_019$Species_rec
+
+labels(sam_data_022) = c(
+  sec12_sec12 = "Energy Source",
+  sec12_sec12_1 = "Use",
+  sec12_sec12_2 = "How do you obtain?",
+  sec12_sec12_3 = "Is this affordable?"
 )
